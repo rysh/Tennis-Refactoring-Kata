@@ -11,3 +11,7 @@ csharp/*.suo
 *.swp
 .DS_Store
 csharp/.vs
+/scala/target/
+/scala/.idea/
+/scala/project/target/
+scala/project/build.properties
