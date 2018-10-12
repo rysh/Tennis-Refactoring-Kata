@@ -24,7 +24,7 @@ class TennisGame1 (val player1Name : String, val player2Name : String) extends T
 
           }
       }
-      else if (m_score1>=4 || m_score2>=4)
+      else if (new Player(m_score1).isMatchPoint || new Player(m_score2).isMatchPoint)
       {
           val minusResult = m_score1-m_score2
           if (minusResult==1) score ="Advantage player1"
@@ -34,7 +34,7 @@ class TennisGame1 (val player1Name : String, val player2Name : String) extends T
       }
       else
       {
-        score = s"${new Score(m_score1)}-${new Score(m_score2)}"
+        score = s"${new Player(m_score1).score}-${new Player(m_score2).score}"
       }
 
     return score
@@ -42,9 +42,13 @@ class TennisGame1 (val player1Name : String, val player2Name : String) extends T
 
 }
 
-class Score(val value: Int) {
+class Player(val point: Int) {
 
-  override def toString = value match {
+  def isMatchPoint: Boolean = point >= 4
+
+  def ==(other: Player) : Boolean = point == other.point
+
+  def score = point match {
     case 0 => "Love"
     case 1 => "Fifteen"
     case 2 => "Thirty"
