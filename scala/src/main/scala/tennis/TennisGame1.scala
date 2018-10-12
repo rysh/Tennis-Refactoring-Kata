@@ -14,7 +14,6 @@ class TennisGame1 (val player1Name : String, val player2Name : String) extends T
 
   def calculateScore() : String = {
       var score : String = ""
-      var tempScore=0
       if (m_score1==m_score2)
       {
         score = m_score1 match {
@@ -35,20 +34,20 @@ class TennisGame1 (val player1Name : String, val player2Name : String) extends T
       }
       else
       {
-          for ( i<- 1 until 3 by 1)
-          {
-              if (i==1) tempScore = m_score1
-              else { score+="-"; tempScore = m_score2;}
-              val tempScore2 = tempScore match {
-                  case 0 => "Love"
-                  case 1 => "Fifteen"
-                  case 2 => "Thirty"
-                  case 3 => "Forty"
-              }
-            score += tempScore2
-          }
+        score = s"${new Score(m_score1)}-${new Score(m_score2)}"
       }
+
     return score
   }
 
+}
+
+class Score(val value: Int) {
+
+  override def toString = value match {
+    case 0 => "Love"
+    case 1 => "Fifteen"
+    case 2 => "Thirty"
+    case 3 => "Forty"
+  }
 }
